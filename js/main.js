@@ -1,17 +1,12 @@
-const getRandomInt = function (min, max) {
-  if (max <= min || min < 0) {
-    return 'Неверный диапазон';
+const getRandomNumber = function (min, max, sign = 0) {
+  if (max > min && min >= 0) {
+    if (sign === 0) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    } else {
+      return (Math.random() * (max - min + 1) + min).toFixed(sign);
+    }
   }
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return 'Неверный диапазон';
 };
 
-getRandomInt();
-
-const getRandomFloat = function (min, max, sign) {
-  if (max <= min || min < 0) {
-    return 'Неверный диапазон';
-  }
-  return (Math.random() * (max - min + 1) + min).toFixed(sign);
-};
-
-getRandomFloat();
+getRandomNumber();
