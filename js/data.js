@@ -50,4 +50,4 @@ const generatePins = () => {
   return pins;
 };
 
-generatePins();
+export {generatePins};
