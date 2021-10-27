@@ -14,6 +14,14 @@ const roomsNumber = {
   '3' : ['1', '2', '3'],
   '100' : ['0'],
 };
+const apartmentPrice = {
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel': 3000,
+  'house': 5000,
+  'palace': 10000,
+};
+
 const messageTemplate = document
   .querySelector('#success')
   .content.querySelector('.success');
@@ -23,11 +31,7 @@ const messageElement = messageTemplate.cloneNode(true);
 roomNumberElement.addEventListener(('change'), () => {
   const currentGuests = roomsNumber[roomNumberElement.value];
   capacityElement.forEach((option) => {
-    if(!currentGuests.includes(option.value)){
-      option.disabled = true;
-    } else {
-      option.disabled = false;
-    }
+    option.disabled = !currentGuests.includes(option.value);
   });
 });
 
@@ -38,21 +42,8 @@ const timeSync = (timeTo, timeFrom) => {
 };
 
 typeElement.addEventListener('change', () =>  {
-  if (typeElement.value === 'bungalow') {
-    priceElement.placeholder = 0;
-  } else if(typeElement.value === 'flat') {
-    priceElement.placeholder = 1000;
-    priceElement.min = 1000;
-  } else if(typeElement.value === 'hotel') {
-    priceElement.placeholder = 3000;
-    priceElement.min = 3000;
-  } else if(typeElement.value === 'house') {
-    priceElement.placeholder = 5000;
-    priceElement.min = 5000;
-  } else if (typeElement.value === 'palace') {
-    priceElement.placeholder = 10000;
-    priceElement.min = 10000;
-  }
+  priceElement.placeholder = apartmentPrice[typeElement.value];
+  priceElement.min = apartmentPrice[typeElement.value];
 });
 
 titleElement.addEventListener('input', () => {
