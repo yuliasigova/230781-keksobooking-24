@@ -81,3 +81,20 @@ formElement.addEventListener('keydown', (evt) => {
     formElement.removeChild(messageElement);
   }
 });
+
+const mapFiltresElement = document.querySelector('.map__filters');
+
+const deactivateWindow = () => {
+  formElement.classList.add('ad-form--disabled');
+  mapFiltresElement.classList.add('map__filters--disabled');
+};
+
+const activateWindow = () => {
+  formElement.classList.remove('ad-form--disabled');
+  mapFiltresElement.classList.remove('map__filters--disabled');
+};
+
+deactivateWindow();
+
+export {activateWindow};
+

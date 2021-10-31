@@ -2,7 +2,6 @@ import { generatePins } from './data.js';
 
 const usersData = generatePins();
 
-const similarListElement = document.querySelector('.map__canvas');
 const similarUserTemplate = document
   .querySelector('#card')
   .content.querySelector('.popup');
@@ -64,6 +63,4 @@ const renderCard = (card) => {
 
 };
 
-const similarElem = usersData.map((user) => renderCard(user));
-similarListElement.appendChild(similarElem[0]);
-
+export {renderCard, usersData};
