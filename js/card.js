@@ -1,7 +1,3 @@
-import { generatePins } from './data.js';
-
-const usersData = generatePins();
-
 const similarUserTemplate = document
   .querySelector('#card')
   .content.querySelector('.popup');
@@ -38,29 +34,34 @@ const renderCard = (card) => {
   renderText(userElement.querySelector('.popup__description'), card.offer.description);
 
   const listFeatures = userElement.querySelectorAll('.popup__feature');
-  const userFeatures = card.offer.features.map(
-    (userFeature) => `popup__feature--${userFeature}`);
-  listFeatures.forEach((item) => {
-    if (!userFeatures.includes(item.classList[1])) {
-      item.remove();
-    }
-  });
-
+  if(card.offer.features) {
+    const userFeatures = card.offer.features.map(
+      (userFeature) => `popup__feature--${userFeature}`);
+    listFeatures.forEach((item) => {
+      if (!userFeatures.includes(item.classList[1])) {
+        item.remove();
+      }
+    });
+  }
   renderImg(userElement.querySelector('.popup__avatar'), card.author.avatar);
   const photosContainer = userElement.querySelector('.popup__photos');
   const listPhotos = photosContainer.querySelector('.popup__photo');
   const photoUsers = card.offer.photos;
   const userFragment = document.createDocumentFragment();
-  photoUsers.forEach((photo) => {
-    listPhotos.src = photo;
-    const clonePhoto = listPhotos.cloneNode(true);
-    userFragment.appendChild(clonePhoto);
-  });
-  photosContainer.innerHTML = '';
-  photosContainer.append(userFragment);
-
+  if(photoUsers) {
+    photoUsers.forEach((photo) => {
+      listPhotos.src = photo;
+      const clonePhoto = listPhotos.cloneNode(true);
+      userFragment.appendChild(clonePhoto);
+    });
+    photosContainer.innerHTML = '';
+    photosContainer.append(userFragment);
+  }
+  else {
+    photosContainer.innerHTML = '';
+  }
   return userElement;
 
 };
 
-export {renderCard, usersData};
+export {renderCard};
