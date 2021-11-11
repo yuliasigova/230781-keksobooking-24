@@ -16,6 +16,7 @@ const renderText = (element, value) => {
   } else {
     element.style.display = 'none';}
 };
+
 const renderImg = (element, value) => {
   if (value) {
     element.src = value;
@@ -32,17 +33,22 @@ const renderCard = (card) => {
   renderText(userElement.querySelector('.popup__text--capacity'), `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`);
   renderText(userElement.querySelector('.popup__text--time'),`Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`);
   renderText(userElement.querySelector('.popup__description'), card.offer.description);
-
-  const listFeatures = userElement.querySelectorAll('.popup__feature');
-  if(card.offer.features) {
-    const userFeatures = card.offer.features.map(
-      (userFeature) => `popup__feature--${userFeature}`);
-    listFeatures.forEach((item) => {
-      if (!userFeatures.includes(item.classList[1])) {
-        item.remove();
-      }
-    });
-  }
+  const renderFeatures = () => {
+    const featuresContainer  = userElement.querySelector('.popup__features');
+    if (card.offer.features) {
+      const listFeatures = userElement.querySelectorAll('.popup__feature');
+      const userFeatures = card.offer.features.map(
+        (userFeature) => `popup__feature--${userFeature}`);
+      listFeatures.forEach((item) => {
+        if (!userFeatures.includes(item.classList[1])) {
+          item.remove();
+        }
+      });
+    } else {
+      featuresContainer.innerHTML = '';
+    }
+  };
+  renderFeatures();
   renderImg(userElement.querySelector('.popup__avatar'), card.author.avatar);
   const photosContainer = userElement.querySelector('.popup__photos');
   const listPhotos = photosContainer.querySelector('.popup__photo');

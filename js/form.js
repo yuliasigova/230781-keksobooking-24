@@ -68,7 +68,6 @@ titleElement.addEventListener('input', () => {
 timeSync(timeInElement, timeOutElement);
 timeSync(timeOutElement, timeInElement);
 
-//активация формы
 const deactivateWindow = () => {
   formElement.classList.add('ad-form--disabled');
   mapFiltresElement.classList.add('map__filters--disabled');
@@ -78,7 +77,6 @@ const activateWindow = () => {
   formElement.classList.remove('ad-form--disabled');
   mapFiltresElement.classList.remove('map__filters--disabled');
 };
-//события
 
 const onSuccessMessageEscKeydown = (evt) => {
   if (evt.key === 'Escape') {
@@ -87,6 +85,7 @@ const onSuccessMessageEscKeydown = (evt) => {
     document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   }
 };
+
 const onErrorMessageEscKeydown = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -94,6 +93,7 @@ const onErrorMessageEscKeydown = (evt) => {
     document.removeEventListener('keydown', onErrorMessageEscKeydown);
   }
 };
+
 const errorMessage = () => {
   document.body.append(errorMessageElement);
   document.addEventListener('keydown', onErrorMessageEscKeydown);
@@ -115,7 +115,6 @@ errorMessageElement.addEventListener('click', () => {
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
 });
 
-//отправка формы
 const sendUserData = (cb) => {
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
