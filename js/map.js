@@ -1,16 +1,19 @@
-import {activateWindow, formElement} from './form.js';
+import {activateWindow, formElement, mapFiltresElement} from './form.js';
 import {renderCard} from './card.js';
+import {filterAllData } from './filter.js';
 import { getData } from './api.js';
+import {appartmentPhotoContainer, avatarPhoto} from './photo.js';
 
-
-const addressElement = document.querySelector('#address');
 const DEFAULT_LOCATION = {
   lat: 35.69324,
   lng: 139.7628,
 };
 const ZOOM = 11;
-
 const SIMILAR_USERS_COUNT = 10;
+const ROUND_VALUE = 5;
+const DEFAULT_PHOTO = 'img/muffin-grey.svg';
+const addressElement = document.querySelector('#address');
+
 const map = L.map('map-canvas').on('load', () => {
   activateWindow();
   addressElement.value = `${DEFAULT_LOCATION.lat}, ${DEFAULT_LOCATION.lng}`;
@@ -49,21 +52,15 @@ mainMarker.addTo(map);
 
 mainMarker.on('moveend', (evt) => {
   const newLocation = evt.target.getLatLng();
-  addressElement.value = `${(newLocation.lat).toFixed(5)}, ${(newLocation.lng).toFixed(5)}`;
+  addressElement.value = `${(newLocation.lat).toFixed(ROUND_VALUE )}, ${(newLocation.lng).toFixed(ROUND_VALUE )}`;
 });
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const clearWindow = () => {
-  formElement.reset();
-  addressElement.value = `${DEFAULT_LOCATION.lat}, ${DEFAULT_LOCATION.lng}`;
-  mainMarker.setLatLng(DEFAULT_LOCATION);
-  map.setView(DEFAULT_LOCATION, ZOOM);
-  map.closePopup();
-};
 
-getData((usersData) => {
-  usersData.slice(0,SIMILAR_USERS_COUNT).forEach((data) => {
+const renderUsers = ((usersData) => {
+  markerGroup.clearLayers();
+  usersData.filter(filterAllData).slice(0, SIMILAR_USERS_COUNT).forEach((data) => {
     const lat = data.location.lat;
     const lng = data.location.lng;
     const userMarkerIcon = L.icon({
@@ -86,5 +83,16 @@ getData((usersData) => {
   });
 });
 
+const clearWindow = () => {
+  getData((users) => renderUsers(users));
+  formElement.reset();
+  mapFiltresElement.reset();
+  appartmentPhotoContainer.innerHTML = '';
+  avatarPhoto.src = DEFAULT_PHOTO;
+  addressElement.value = `${DEFAULT_LOCATION.lat}, ${DEFAULT_LOCATION.lng}`;
+  mainMarker.setLatLng(DEFAULT_LOCATION);
+  map.setView(DEFAULT_LOCATION, ZOOM);
+  map.closePopup();
+};
 
-export {clearWindow};
+export {clearWindow, renderUsers, markerGroup};
