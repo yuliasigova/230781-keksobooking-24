@@ -6,16 +6,6 @@ const avatarPhoto = avatarPhotoContainer.querySelector('img');
 const appartmentUpload = document.querySelector('.ad-form__input');
 const appartmentPhotoContainer = document.querySelector('.ad-form__photo');
 
-// const chooseFile = (element, photo) => {
-//   const file = element.files[0];
-//   const fileName = file.name.toLowerCase();
-//   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-//   if(matches) {
-//     const avatar = photo.querySelector('img');
-//     avatar.src = URL.createObjectURL(file);
-//   }
-// };
-
 avatarUpload.addEventListener('change', () => {
   const file = avatarUpload.files[0];
   const fileName = file.name.toLowerCase();
