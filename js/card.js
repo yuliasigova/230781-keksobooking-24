@@ -23,6 +23,21 @@ const renderImg = (element, value) => {
   } else {
     element.style.display = 'none';}
 };
+const renderPhoto = (container, element, value) => {
+  const userFragment = document.createDocumentFragment();
+  if(value) {
+    value.forEach((photo) => {
+      element.src = photo;
+      const clonePhoto = element.cloneNode(true);
+      userFragment.appendChild(clonePhoto);
+    });
+    container.innerHTML = '';
+    container.append(userFragment);
+  }
+  else {
+    container.innerHTML = '';
+  }
+};
 
 const renderCard = (card) => {
   const userElement = similarUserTemplate.cloneNode(true);
@@ -50,24 +65,10 @@ const renderCard = (card) => {
   };
   renderFeatures();
   renderImg(userElement.querySelector('.popup__avatar'), card.author.avatar);
-  const photosContainer = userElement.querySelector('.popup__photos');
-  const listPhotos = photosContainer.querySelector('.popup__photo');
-  const photoUsers = card.offer.photos;
-  const userFragment = document.createDocumentFragment();
-  if(photoUsers) {
-    photoUsers.forEach((photo) => {
-      listPhotos.src = photo;
-      const clonePhoto = listPhotos.cloneNode(true);
-      userFragment.appendChild(clonePhoto);
-    });
-    photosContainer.innerHTML = '';
-    photosContainer.append(userFragment);
-  }
-  else {
-    photosContainer.innerHTML = '';
-  }
-  return userElement;
+  renderPhoto(userElement.querySelector('.popup__photos'), userElement.querySelector('.popup__photo'),
+    card.offer.photos);
 
+  return userElement;
 };
 
 export {renderCard};

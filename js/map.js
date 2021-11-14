@@ -1,4 +1,4 @@
-import {activateWindow, formElement, mapFiltresElement} from './form.js';
+import {activateWindow, formElement, mapFiltresElement, resetPrice} from './form.js';
 import {renderCard} from './card.js';
 import {filterAllData } from './filter.js';
 import { getData } from './api.js';
@@ -87,6 +87,7 @@ const clearWindow = () => {
   getData((users) => renderUsers(users));
   formElement.reset();
   mapFiltresElement.reset();
+  resetPrice();
   appartmentPhotoContainer.innerHTML = '';
   avatarPhoto.src = DEFAULT_PHOTO;
   addressElement.value = `${DEFAULT_LOCATION.lat}, ${DEFAULT_LOCATION.lng}`;

@@ -25,7 +25,7 @@ const filterPrice = (item) => {
   } else if (housingPriceElement.value === 'high') {
     return item.offer.price > price.high;
   } else if (housingPriceElement.value === 'middle') {
-    return price.low < item.offer.price && item.offer.price < price.high;
+    return price.low <= item.offer.price && item.offer.price <= price.high;
   } else if (housingPriceElement.value === DEFAULT_TYPE) {
     return true;
   } else {
