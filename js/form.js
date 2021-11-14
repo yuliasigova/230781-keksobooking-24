@@ -42,10 +42,22 @@ const timeSync = (timeTo, timeFrom) => {
   });
 };
 
-typeElement.addEventListener('change', () =>  {
-  priceElement.placeholder = apartmentPrice[typeElement.value];
-  priceElement.min = apartmentPrice[typeElement.value];
+const changePrice = (price, type) => {
+  price.placeholder = apartmentPrice[type.value];
+  price.min = apartmentPrice[type.value];
+};
+
+typeElement.addEventListener('change', () =>{
+  changePrice(priceElement, typeElement);
 });
+
+const resetPrice = () => {
+  changePrice(priceElement, typeElement);
+};
+// typeElement.addEventListener('change', () =>  {
+//   priceElement.placeholder = apartmentPrice[typeElement.value];
+//   priceElement.min = apartmentPrice[typeElement.value];
+// });
 
 titleElement.addEventListener('input', () => {
   const valueLength = titleElement.value.length;
@@ -129,4 +141,4 @@ const sendUserData = (cb) => {
 
 deactivateWindow();
 
-export {activateWindow, mapFiltresElement, formElement, resetButtonElement, sendUserData};
+export {activateWindow, mapFiltresElement, formElement, resetButtonElement, sendUserData, resetPrice};
