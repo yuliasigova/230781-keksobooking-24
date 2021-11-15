@@ -42,8 +42,18 @@ const housingFutures = (item) => {
   return checkedInput.every((input) => item.offer.features.includes(input.value));
 };
 
-const filterAllData = (offer) => filterType(offer) && filterPrice(offer) && filterRoom(offer) && filterGuest(offer) && housingFutures(offer);
-
+const filterAllData = (offers) => {
+  const result = [];
+  for (const offer of offers) {
+    if (filterType(offer) && filterPrice(offer) && filterRoom(offer) && filterGuest(offer) && housingFutures(offer)) {
+      result.push(offer);
+      if(result.length === 10) {
+        break;
+      }
+    }
+  }
+  return result;
+};
 
 const changeFiltersElement = (cb) => {
   mapFiltresElement.addEventListener('change', debounce(() => cb()));

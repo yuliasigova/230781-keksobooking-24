@@ -9,7 +9,7 @@ const DEFAULT_LOCATION = {
   lng: 139.7628,
 };
 const ZOOM = 11;
-const SIMILAR_USERS_COUNT = 10;
+//const SIMILAR_USERS_COUNT = 10;
 const ROUND_VALUE = 5;
 const DEFAULT_PHOTO = 'img/muffin-grey.svg';
 const addressElement = document.querySelector('#address');
@@ -60,7 +60,7 @@ const markerGroup = L.layerGroup().addTo(map);
 
 const renderUsers = ((usersData) => {
   markerGroup.clearLayers();
-  usersData.filter(filterAllData).slice(0, SIMILAR_USERS_COUNT).forEach((data) => {
+  filterAllData(usersData).forEach((data) => {
     const lat = data.location.lat;
     const lng = data.location.lng;
     const userMarkerIcon = L.icon({
