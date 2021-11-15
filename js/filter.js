@@ -2,6 +2,7 @@ import {mapFiltresElement} from './form.js';
 import {debounce} from './util.js';
 
 const DEFAULT_TYPE = 'any';
+const SIMILAR_USERS_COUNT = 10;
 const housingTypeElement = mapFiltresElement.querySelector('#housing-type');
 const housingPriceElement = mapFiltresElement.querySelector('#housing-price');
 const housingRoomElement = mapFiltresElement.querySelector('#housing-rooms');
@@ -47,7 +48,7 @@ const filterAllData = (offers) => {
   for (const offer of offers) {
     if (filterType(offer) && filterPrice(offer) && filterRoom(offer) && filterGuest(offer) && housingFutures(offer)) {
       result.push(offer);
-      if(result.length === 10) {
+      if(result.length === SIMILAR_USERS_COUNT) {
         break;
       }
     }

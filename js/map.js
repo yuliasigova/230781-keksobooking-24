@@ -9,7 +9,6 @@ const DEFAULT_LOCATION = {
   lng: 139.7628,
 };
 const ZOOM = 11;
-//const SIMILAR_USERS_COUNT = 10;
 const ROUND_VALUE = 5;
 const DEFAULT_PHOTO = 'img/muffin-grey.svg';
 const addressElement = document.querySelector('#address');

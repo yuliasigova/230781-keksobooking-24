@@ -54,10 +54,6 @@ typeElement.addEventListener('change', () =>{
 const resetPrice = () => {
   changePrice(priceElement, typeElement);
 };
-// typeElement.addEventListener('change', () =>  {
-//   priceElement.placeholder = apartmentPrice[typeElement.value];
-//   priceElement.min = apartmentPrice[typeElement.value];
-// });
 
 titleElement.addEventListener('input', () => {
   const valueLength = titleElement.value.length;
